@@ -1,4 +1,4 @@
-# Real-time Intrusion Detection Web App
+# MLShield: Intrusion Detection System Web App
 
 ## About
 * Real-time Intrusion Detection System implementing Machine Learning. 
