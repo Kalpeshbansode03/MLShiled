@@ -47,19 +47,21 @@ $(document).ready(function(){
     socket.on('newresult', function(msg) {
         console.log("Received result" + msg.result);
         //maintain a list of ten messages
-        if (messages_received.length >= 10){
-            messages_received.shift()
-        }            
+        // if (messages_received.length >= 10){
+        //     messages_received.shift()
+        // }            
         messages_received.push(msg.result);
+        console.log(messages_received.filter(x => x.toString().includes('python')).length)
+        if(messages_received.filter(x => x.toString().includes('python')).length > 100) alert("You are receiving too many requests from same IP. It might be a denial of service attack.")
+        if(msg.result[8].includes('python') && msg.result.toString().includes('TCP')) { msg.result[10] = 'High Risk'; msg.result[12] = '<p style="color:red;">High Risk</p>'; }
         messages_string = '<tr><th>Flow ID</th><th>Src IP</th><th>Src Port</th><th>Dst IP</th><th>Dst Port</th><th>Protocol</th><th>Flow start time</th><th>Flow last seen</th><th>App name</th><th>PID</th><th>Prediction</th><th>Prob</th><th>Risk</th></tr>';
-
+        console.log(msg.result)
         for (var i = messages_received.length-1 ; i >= 0; i--){
             messages_string = messages_string + '<tr>';
             for (var j = 0; j <messages_received[i].length; j++){
                 messages_string = messages_string + '<td>' + messages_received[i][j].toString() + '</td>'; 
             }
             messages_string = messages_string+ '<td> <a href="/flow-detail?flow_id='+messages_received[i][0].toString()+'"><div>Detail</div></a></td>' + '</tr>';
-
         }
         $('#details').html(messages_string);
 
@@ -84,6 +86,3 @@ $(document).ready(function(){
     });
 
 });
-
-
-
