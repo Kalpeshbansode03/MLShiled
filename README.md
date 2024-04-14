@@ -1,6 +1,5 @@
 # Real-time Intrusion Detection Web App
-<b>Project III</b><br>
-<b>Nguyễn Việt Hoàng - 20194434</b><br>
+
 ## About
 * Real-time Intrusion Detection System implementing Machine Learning. 
 
